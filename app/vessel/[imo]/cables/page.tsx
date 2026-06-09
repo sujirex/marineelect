@@ -1,5 +1,5 @@
 "use client"
-import { use, useState } from "react"
+import { useState } from "react"
 import { useVessel } from "../../../../hooks/useVessel"
 import { VesselSidebar } from "../../../../components/VesselSidebar"
 import { Plus, Trash2, Cable } from "lucide-react"
@@ -24,8 +24,8 @@ function utilisation(cable: CableType) {
   return Math.round((cable.currentActual / cable.currentRating) * 100)
 }
 
-export default function CablesPage({ params }: { params: Promise<{ imo: string }> }) {
-  const { imo } = use(params)
+export default function CablesPage({ params }: { params: { imo: string } }) {
+  const { imo } = params
   const { data, loading, addCable, updateCable, deleteCable } = useVessel(imo)
   const [showAdd, setShowAdd] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)

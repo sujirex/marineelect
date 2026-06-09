@@ -1,5 +1,5 @@
 "use client"
-import { use, useState } from "react"
+import { useState } from "react"
 import { useVessel } from "../../../../hooks/useVessel"
 import { VesselSidebar } from "../../../../components/VesselSidebar"
 import { Plus, Trash2, Zap, ChevronDown, ChevronRight } from "lucide-react"
@@ -37,8 +37,8 @@ function voltageDrop(kw: number, pf: number, lengthM: number, voltV = 440, sqmm 
 
 const CATEGORIES = ["Propulsion","Deck","Cargo","Safety","Navigation","Accommodation","Manufacturer","Other"]
 
-export default function LoadsPage({ params }: { params: Promise<{ imo: string }> }) {
-  const { imo } = use(params)
+export default function LoadsPage({ params }: { params: { imo: string } }) {
+  const { imo } = params
   const { data, loading, updateSwitchboard, addSwitchboard, deleteSwitchboard } = useVessel(imo)
   const [expandedSB, setExpandedSB] = useState<Record<string, boolean>>({})
   const [rawInputs, setRawInputs] = useState<Record<string, string>>({})

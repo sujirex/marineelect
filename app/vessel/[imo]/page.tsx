@@ -1,5 +1,5 @@
 "use client"
-import { use } from "react"
+import React from "react"
 import { useVessel } from "../../../hooks/useVessel"
 import { VesselSidebar } from "../../../components/VesselSidebar"
 import { Ship, Zap, Settings2, AlertTriangle, Wrench, TrendingUp, Cable } from "lucide-react"
@@ -9,8 +9,8 @@ function severityBadge(count: number, label: string, cls: string, icon: React.Re
   return count > 0 ? <span className={`badge ${cls}`}>{icon}{count} {label}</span> : null
 }
 
-export default function VesselOverview({ params }: { params: Promise<{ imo: string }> }) {
-  const { imo } = use(params)
+export default function VesselOverview({ params }: { params: { imo: string } }) {
+  const { imo } = params
   const { data, loading } = useVessel(imo)
 
   if (loading) return <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "60vh", color: "var(--text-muted)" }}>Loading…</div>

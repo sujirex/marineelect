@@ -1,5 +1,5 @@
 "use client"
-import { use, useState } from "react"
+import { useState } from "react"
 import { useVessel } from "../../../../hooks/useVessel"
 import { VesselSidebar } from "../../../../components/VesselSidebar"
 import { Plus, Wrench, CheckCircle, AlertTriangle, Clock } from "lucide-react"
@@ -24,8 +24,8 @@ function statusBadge(status: "overdue"|"soon"|"ok") {
   return <span className="badge badge-success"><CheckCircle size={10} style={{ marginRight: 3 }}/>On Schedule</span>
 }
 
-export default function MaintenancePage({ params }: { params: Promise<{ imo: string }> }) {
-  const { imo } = use(params)
+export default function MaintenancePage({ params }: { params: { imo: string } }) {
+  const { imo } = params
   const { data, loading, addMaintenance, updateMaintenance, deleteMaintenance } = useVessel(imo)
   const [showAdd, setShowAdd] = useState(false)
   const [editId, setEditId] = useState<string | null>(null)

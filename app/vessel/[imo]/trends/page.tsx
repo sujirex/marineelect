@@ -1,5 +1,5 @@
 "use client"
-import { use } from "react"
+import React from "react"
 import { useVessel } from "../../../../hooks/useVessel"
 import { VesselSidebar } from "../../../../components/VesselSidebar"
 import {
@@ -26,8 +26,8 @@ const tooltipStyle = {
   labelStyle: { color: "#8a9bbf" },
 }
 
-export default function TrendsPage({ params }: { params: Promise<{ imo: string }> }) {
-  const { imo } = use(params)
+export default function TrendsPage({ params }: { params: { imo: string } }) {
+  const { imo } = params
   const { data, loading } = useVessel(imo)
 
   if (loading) return <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "60vh", color: "var(--text-muted)" }}>Loading…</div>

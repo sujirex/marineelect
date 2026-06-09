@@ -1,5 +1,5 @@
 "use client"
-import { use, useState } from "react"
+import { useState } from "react"
 import { useVessel } from "../../../../hooks/useVessel"
 import { VesselSidebar } from "../../../../components/VesselSidebar"
 import { Plus, AlertTriangle, CheckCircle, Clock } from "lucide-react"
@@ -26,8 +26,8 @@ function recurringFaults(logs: FaultLog[]) {
   return Object.entries(map).filter(([, c]) => c >= 2).map(([k]) => k)
 }
 
-export default function FaultsPage({ params }: { params: Promise<{ imo: string }> }) {
-  const { imo } = use(params)
+export default function FaultsPage({ params }: { params: { imo: string } }) {
+  const { imo } = params
   const { data, loading, addFaultLog, updateFaultLog } = useVessel(imo)
   const [showAdd, setShowAdd] = useState(false)
   const [filter, setFilter] = useState<"all"|"open"|"resolved">("all")

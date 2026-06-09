@@ -1,5 +1,5 @@
 "use client"
-import { use, useState } from "react"
+import { useState } from "react"
 import { useVessel } from "../../../../hooks/useVessel"
 import { VesselSidebar } from "../../../../components/VesselSidebar"
 import { Plus, Trash2, Settings2, Power } from "lucide-react"
@@ -106,8 +106,8 @@ function GenCard({ gen, onToggle, onUpdate, onDelete }: {
   )
 }
 
-export default function GeneratorsPage({ params }: { params: Promise<{ imo: string }> }) {
-  const { imo } = use(params)
+export default function GeneratorsPage({ params }: { params: { imo: string } }) {
+  const { imo } = params
   const { data, loading, updateGenerator, addGenerator, deleteGenerator } = useVessel(imo)
   const [adding, setAdding] = useState(false)
 
