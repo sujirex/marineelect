@@ -59,9 +59,9 @@ export default function CablesPage({ params }: { params: { imo: string } }) {
   }
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="vessel-layout">
       <VesselSidebar imo={imo} vesselName={data.vessel.name} />
-      <div style={{ flex: 1, padding: "28px 24px", minWidth: 0 }}>
+      <div className="vessel-content">
 
         <div className="section-header">
           <div>

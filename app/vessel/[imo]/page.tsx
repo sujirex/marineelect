@@ -39,9 +39,9 @@ export default function VesselOverview({ params }: { params: { imo: string } }) 
   ]
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="vessel-layout">
       <VesselSidebar imo={imo} vesselName={vessel.name} />
-      <div style={{ flex: 1, padding: "28px 24px", maxWidth: "calc(100% - var(--sidebar-w))", overflowX: "hidden" }}>
+      <div className="vessel-content">
 
         {/* Header */}
         <div style={{ marginBottom: 24 }}>

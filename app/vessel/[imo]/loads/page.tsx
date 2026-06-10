@@ -90,9 +90,9 @@ export default function LoadsPage({ params }: { params: { imo: string } }) {
   const totalKW = data.switchboards.reduce((t, sb) => t + switchboardKW(sb), 0)
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="vessel-layout">
       <VesselSidebar imo={imo} vesselName={data.vessel.name} />
-      <div style={{ flex: 1, padding: "28px 24px", minWidth: 0 }}>
+      <div className="vessel-content">
 
         <div className="section-header">
           <div>

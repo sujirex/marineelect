@@ -127,9 +127,9 @@ export default function TrendsPage({ params }: { params: { imo: string } }) {
   ]
 
   return (
-    <div style={{ display: "flex" }}>
+    <div className="vessel-layout">
       <VesselSidebar imo={imo} vesselName={data.vessel.name} />
-      <div style={{ flex: 1, padding: "28px 24px", minWidth: 0 }}>
+      <div className="vessel-content">
 
         <div style={{ marginBottom: 24 }}>
           <h1 style={{ fontSize: 20, fontWeight: 700, marginBottom: 2 }}>90-Day Trend Analysis</h1>
