@@ -30,11 +30,6 @@ Ship electrical work is tracked across scattered spreadsheets, PDFs, and surveyo
 - React, Recharts for data visualization
 - Deployed on Cloudflare Pages
 
-## Screenshots
-
-> _Add 2–3 screenshots here: vessel workspace, switchboard/load view, and a simulation plot._
->
-> `![Vessel workspace](docs/workspace.png)`
 
 ## Running locally
 
