@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { AppNav } from "../components/AppNav"
+import { ThemeProvider } from "../context/ThemeContext"
 
 export const metadata: Metadata = {
   title: "MarineElect — Ship Electrical Intelligence",
@@ -9,12 +10,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        <AppNav />
-        <main style={{ flex: 1, paddingTop: "var(--nav-h)" }}>
-          {children}
-        </main>
+        <ThemeProvider>
+          <AppNav />
+          <main style={{ flex: 1, paddingTop: "var(--nav-h)" }}>
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   )

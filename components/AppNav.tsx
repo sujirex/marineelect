@@ -2,11 +2,13 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import { Anchor, LayoutDashboard, Ships, Menu, X, BarChart3, Zap } from "lucide-react"
+import { LayoutDashboard, Menu, X, BarChart3, Zap, Sun, Moon } from "lucide-react"
+import { useTheme } from "../context/ThemeContext"
 
 export function AppNav() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const { theme, toggle } = useTheme()
 
   const links = [
     { href: "/", label: "Fleet", icon: LayoutDashboard },
@@ -18,7 +20,7 @@ export function AppNav() {
   return (
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, height: "var(--nav-h)",
-      background: "rgba(10,15,30,0.92)", backdropFilter: "blur(12px)",
+      background: "color-mix(in srgb, var(--bg) 92%, transparent)", backdropFilter: "blur(12px)",
       borderBottom: "1px solid var(--border)", zIndex: 100,
       display: "flex", alignItems: "center", padding: "0 20px", gap: 0,
     }}>
@@ -50,6 +52,14 @@ export function AppNav() {
           </Link>
         ))}
       </div>
+
+      {/* Theme toggle */}
+      <button onClick={toggle} aria-label="Toggle theme" style={{
+        background: "none", border: "none", cursor: "pointer", color: "var(--text-secondary)",
+        padding: 6, marginLeft: 8, display: "flex", alignItems: "center",
+      }}>
+        {theme === "light" ? <Moon size={17} /> : <Sun size={17} />}
+      </button>
 
       {/* Mobile toggle */}
       <button onClick={() => setOpen(o => !o)} className="nav-mobile-btn" style={{

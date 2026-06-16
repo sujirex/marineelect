@@ -3,23 +3,23 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --brand-from: #667db6;
-  --brand-to:   #0082c8;
-  --brand-grad: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);
-  --brand-grad-135: linear-gradient(135deg, #667db6 0%, #0082c8 100%);
+  --brand-from: #0A9696;
+  --brand-to:   #0DC8C8;
+  --brand-grad: linear-gradient(135deg, #0A9696, #0DC8C8);
+  --brand-grad-135: linear-gradient(135deg, #0A9696 0%, #0DC8C8 100%);
 
-  --bg:          #0a0f1e;
-  --bg-card:     #111827;
-  --bg-elevated: #1a2235;
-  --border:      rgba(102,125,182,0.25);
-  --border-hover:rgba(0,130,200,0.55);
+  --bg:          #020D0D;
+  --bg-card:     #051C1C;
+  --bg-elevated: #0D2828;
+  --border:      rgba(10,150,150,0.20);
+  --border-hover:rgba(13,200,200,0.45);
 
-  --text-primary:   #e8edf8;
-  --text-secondary: #8a9bbf;
-  --text-muted:     #526080;
+  --text-primary:   #CFF0F0;
+  --text-secondary: #7ACFCF;
+  --text-muted:     #3A7070;
 
-  --accent:      #0082c8;
-  --accent-light:#667db6;
+  --accent:      #0A9696;
+  --accent-light:#0DC8C8;
   --success:     #22c55e;
   --warning:     #f59e0b;
   --danger:      #ef4444;
@@ -38,6 +38,38 @@ html, body { height: 100%; background: var(--bg); color: var(--text-primary); fo
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Light mode ── */
+[data-theme="light"] {
+  --brand-from: #0A7C7C;
+  --brand-to:   #0898A8;
+  --brand-grad: linear-gradient(135deg, #0A7C7C, #0898A8);
+  --brand-grad-135: linear-gradient(135deg, #0A7C7C 0%, #0898A8 100%);
+  --bg:          #EDF9F9;
+  --bg-card:     #ffffff;
+  --bg-elevated: #D4F3F3;
+  --border:      rgba(10,150,150,0.16);
+  --border-hover:rgba(10,150,150,0.40);
+  --text-primary:   #021414;
+  --text-secondary: #1A5858;
+  --text-muted:     #4A7878;
+  --accent:      #0A7C7C;
+  --accent-light:#0898A8;
+}
+
+[data-theme="light"] html,
+[data-theme="light"] body {
+  background: #EDF9F9;
+  color: #021414;
+}
+
+[data-theme="light"] .card {
+  box-shadow: 0 1px 6px rgba(10,150,150,0.08);
+}
+
+[data-theme="light"] .data-table th {
+  background: #D4F3F3;
+}
 
 /* Cards */
 .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
@@ -59,14 +91,14 @@ html, body { height: 100%; background: var(--bg); color: var(--text-primary); fo
 .badge-warning { background: rgba(245,158,11,.15); color: #f59e0b; border: 1px solid rgba(245,158,11,.3); }
 .badge-danger  { background: rgba(239,68,68,.15);  color: #ef4444; border: 1px solid rgba(239,68,68,.3); }
 .badge-critical{ background: rgba(220,38,38,.2);   color: #f87171; border: 1px solid rgba(220,38,38,.4); }
-.badge-info    { background: rgba(0,130,200,.15);   color: #38bdf8; border: 1px solid rgba(0,130,200,.3); }
+.badge-info    { background: rgba(10,150,150,.15);  color: #0DC8C8; border: 1px solid rgba(10,150,150,.3); }
 .badge-neutral { background: rgba(82,96,128,.2);    color: var(--text-secondary); border: 1px solid var(--border); }
 
 /* Table */
 .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .data-table th { text-align: left; padding: 10px 14px; color: var(--text-muted); font-weight: 500; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 1; }
 .data-table td { padding: 10px 14px; border-bottom: 1px solid rgba(102,125,182,.08); color: var(--text-primary); }
-.data-table tr:hover td { background: rgba(102,125,182,.05); }
+.data-table tr:hover td { background: rgba(10,150,150,.05); }
 
 /* Inputs */
 .input { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); padding: 8px 12px; font-size: 13px; outline: none; width: 100%; transition: border-color .15s; }
