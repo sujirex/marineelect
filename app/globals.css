@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -31,7 +31,7 @@
   --radius-sm: 6px;
 }
 
-html, body { height: 100%; background: var(--bg); color: var(--text-primary); font-family: "Inter", sans-serif; font-size: 14px; line-height: 1.5; }
+html, body { height: 100%; background: var(--bg); color: var(--text-primary); font-family: "Roboto", sans-serif; font-size: 14px; line-height: 1.5; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -151,9 +151,4 @@ html, body { height: 100%; background: var(--bg); color: var(--text-primary); fo
 
   /* Stat grids: 2 columns on small screens */
   .stat-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .stat-value { font-size: 20px !important; }
-
-  /* Recharts: prevent overflow */
-  .recharts-wrapper,
-  .recharts-surface { max-width: 100%; overflow: visible; }
-}
+  .stat-valu
