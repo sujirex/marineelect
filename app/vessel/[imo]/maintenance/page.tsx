@@ -163,7 +163,7 @@ export default function MaintenancePage({ params }: { params: { imo: string } })
             const days = daysUntil(item.nextDue)
             return (
               <div key={item.id} className="card" style={{
-                borderLeft: `3px solid ${status === "overdue" ? "var(--danger)" : status === "soon" ? "var(--warning)" : "rgba(34,197,94,.4)"}`,
+                borderLeft: `3px solid ${status === "overdue" ? "var(--danger)" : status === "soon" ? "var(--warning)" : "color-mix(in srgb, var(--ok) 45%, transparent)"}`,
               }}>
                 <div style={{ display: "flex", alignItems: "flex-start", gap: 12, flexWrap: "wrap" }}>
                   <div style={{ flex: 1, minWidth: 200 }}>

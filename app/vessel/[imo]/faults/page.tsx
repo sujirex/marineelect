@@ -77,10 +77,10 @@ export default function FaultsPage({ params }: { params: { imo: string } }) {
 
         {/* Recurring alert */}
         {recurring.length > 0 && (
-          <div style={{ background: "rgba(245,158,11,.08)", border: "1px solid rgba(245,158,11,.3)", borderRadius: "var(--radius)", padding: "12px 16px", marginBottom: 20 }}>
+          <div className="alert alert-warn" style={{ display: "block", marginBottom: 20 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
               <AlertTriangle size={15} color="var(--warning)" />
-              <span style={{ fontWeight: 600, fontSize: 13, color: "#fde68a" }}>Recurring Fault Patterns Detected</span>
+              <span style={{ fontWeight: 600, fontSize: 13 }}>Recurring Fault Patterns Detected</span>
             </div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               {recurring.map(k => {

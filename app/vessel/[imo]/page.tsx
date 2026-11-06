@@ -30,12 +30,12 @@ export default function VesselOverview({ params }: { params: { imo: string } }) 
   const cableFaults = cables.filter(c => c.faultCondition !== "Normal")
 
   const quickNav = [
-    { href: `/vessel/${imo}/loads`,       label: "Load Schedule",  icon: <Zap size={16} />,          color: "#667db6", desc: `${switchboards.length} switchboard${switchboards.length !== 1 ? "s" : ""}` },
-    { href: `/vessel/${imo}/generators`,  label: "Generators",     icon: <Settings2 size={16} />,    color: "#0082c8", desc: `${generators.length} units` },
-    { href: `/vessel/${imo}/cables`,      label: "Cable Database", icon: <Cable size={16} />,        color: "#667db6", desc: `${cables.length} cables` },
+    { href: `/vessel/${imo}/loads`,       label: "Load Schedule",  icon: <Zap size={16} />,          color: "var(--g2)", desc: `${switchboards.length} switchboard${switchboards.length !== 1 ? "s" : ""}` },
+    { href: `/vessel/${imo}/generators`,  label: "Generators",     icon: <Settings2 size={16} />,    color: "var(--g1)", desc: `${generators.length} units` },
+    { href: `/vessel/${imo}/cables`,      label: "Cable Database", icon: <Cable size={16} />,        color: "var(--g2)", desc: `${cables.length} cables` },
     { href: `/vessel/${imo}/faults`,      label: "Fault Logs",     icon: <AlertTriangle size={16} />,color: cableFaults.length + openFaults.length > 0 ? "var(--danger)" : "var(--success)", desc: `${openFaults.length} open` },
     { href: `/vessel/${imo}/maintenance`, label: "Maintenance",    icon: <Wrench size={16} />,       color: overdue.length > 0 ? "var(--warning)" : "var(--success)", desc: `${overdue.length} overdue` },
-    { href: `/vessel/${imo}/trends`,      label: "90-Day Trends",  icon: <TrendingUp size={16} />,   color: "#0082c8", desc: "Load & fault history" },
+    { href: `/vessel/${imo}/trends`,      label: "90-Day Trends",  icon: <TrendingUp size={16} />,   color: "var(--g1)", desc: "Load & fault history" },
   ]
 
   return (
@@ -46,7 +46,7 @@ export default function VesselOverview({ params }: { params: { imo: string } }) 
         {/* Header */}
         <div style={{ marginBottom: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-            <Ship size={20} color="var(--accent)" />
+            <Ship size={22} color="var(--g3)" />
             <h1 style={{ fontSize: 22, fontWeight: 700 }}>{vessel.name}</h1>
           </div>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
@@ -60,15 +60,15 @@ export default function VesselOverview({ params }: { params: { imo: string } }) 
         {(openFaults.length > 0 || overdue.length > 0 || cableFaults.length > 0) && (
           <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 22 }}>
             {openFaults.filter(f => f.severity === "Critical").length > 0 && (
-              <div style={{ background: "rgba(220,38,38,.1)", border: "1px solid rgba(220,38,38,.35)", borderRadius: "var(--radius-sm)", padding: "10px 14px", display: "flex", alignItems: "center", gap: 8 }}>
+              <div className="alert alert-danger">
                 <AlertTriangle size={15} color="var(--critical)" />
-                <span style={{ fontSize: 13, color: "#fca5a5" }}>CRITICAL: {openFaults.filter(f => f.severity === "Critical")[0]?.description}</span>
+                <span>CRITICAL: {openFaults.filter(f => f.severity === "Critical")[0]?.description}</span>
               </div>
             )}
             {overdue.length > 0 && (
-              <div style={{ background: "rgba(245,158,11,.08)", border: "1px solid rgba(245,158,11,.3)", borderRadius: "var(--radius-sm)", padding: "10px 14px", display: "flex", alignItems: "center", gap: 8 }}>
+              <div className="alert alert-warn">
                 <Wrench size={15} color="var(--warning)" />
-                <span style={{ fontSize: 13, color: "#fde68a" }}>{overdue.length} maintenance item{overdue.length > 1 ? "s" : ""} overdue — immediate attention required</span>
+                <span>{overdue.length} maintenance item{overdue.length > 1 ? "s" : ""} overdue — immediate attention required</span>
               </div>
             )}
           </div>

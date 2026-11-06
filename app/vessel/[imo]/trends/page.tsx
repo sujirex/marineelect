@@ -6,6 +6,7 @@ import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from "recharts"
 import { TrendingUp, TrendingDown, Minus } from "lucide-react"
+import { useBrandColors } from "../../../../lib/useBrandColors"
 
 function trend(data: number[]): "up" | "down" | "stable" {
   if (data.length < 7) return "stable"
@@ -21,13 +22,11 @@ function TrendIcon({ dir }: { dir: "up"|"down"|"stable" }) {
   return <Minus size={16} color="var(--text-muted)" />
 }
 
-const tooltipStyle = {
-  contentStyle: { background: "#1a2235", border: "1px solid rgba(102,125,182,.3)", borderRadius: 8, fontSize: 12 },
-  labelStyle: { color: "#8a9bbf" },
-}
+const tooltipStyle = { contentStyle: { borderRadius: 10, fontSize: 12 } }
 
 export default function TrendsPage({ params }: { params: { imo: string } }) {
   const { imo } = params
+  const C = useBrandColors()
   const { data, loading } = useVessel(imo)
 
   if (loading) return <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "60vh", color: "var(--text-muted)" }}>Loading…</div>
@@ -71,7 +70,7 @@ export default function TrendsPage({ params }: { params: { imo: string } }) {
             <XAxis dataKey="date" tick={{ fontSize: 10 }} tickFormatter={d => d.slice(5)} />
             <YAxis tick={{ fontSize: 10 }} width={50} />
             <Tooltip {...tooltipStyle} />
-            <Line type="monotone" dataKey="totalLoadKW" stroke="#667db6" strokeWidth={2} dot={false} name="kW" />
+            <Line type="monotone" dataKey="totalLoadKW" stroke={C.g2} strokeWidth={2} dot={false} name="kW" />
           </LineChart>
         </ResponsiveContainer>
       )
@@ -87,7 +86,7 @@ export default function TrendsPage({ params }: { params: { imo: string } }) {
             <XAxis dataKey="date" tick={{ fontSize: 10 }} tickFormatter={d => d.slice(5)} />
             <YAxis tick={{ fontSize: 10 }} domain={[0, 100]} unit="%" width={42} />
             <Tooltip {...tooltipStyle} formatter={(v: number) => [`${v}%`, "Load Factor"]} />
-            <Line type="monotone" dataKey="generatorLoadPct" stroke="#0082c8" strokeWidth={2} dot={false} name="Load %" />
+            <Line type="monotone" dataKey="generatorLoadPct" stroke={C.g3} strokeWidth={2} dot={false} name="Load %" />
           </LineChart>
         </ResponsiveContainer>
       )
@@ -103,7 +102,7 @@ export default function TrendsPage({ params }: { params: { imo: string } }) {
             <XAxis dataKey="date" tick={{ fontSize: 10 }} tickFormatter={d => d.slice(5)} />
             <YAxis tick={{ fontSize: 10 }} domain={[0.7, 1.0]} width={42} />
             <Tooltip {...tooltipStyle} />
-            <Line type="monotone" dataKey="avgPF" stroke="#22c55e" strokeWidth={2} dot={false} name="PF" />
+            <Line type="monotone" dataKey="avgPF" stroke={C.ok} strokeWidth={2} dot={false} name="PF" />
           </LineChart>
         </ResponsiveContainer>
       )
@@ -119,7 +118,7 @@ export default function TrendsPage({ params }: { params: { imo: string } }) {
             <XAxis dataKey="date" tick={{ fontSize: 10 }} tickFormatter={d => d.slice(5)} />
             <YAxis tick={{ fontSize: 10 }} allowDecimals={false} width={30} />
             <Tooltip {...tooltipStyle} />
-            <Bar dataKey="faultCount" fill="#ef4444" radius={[3,3,0,0]} name="Faults" />
+            <Bar dataKey="faultCount" fill={C["t-danger"]} radius={[3,3,0,0]} name="Faults" />
           </BarChart>
         </ResponsiveContainer>
       )

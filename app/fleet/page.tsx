@@ -1,6 +1,7 @@
 "use client"
 import { useFleet } from "../../hooks/useFleet"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from "recharts"
+import { useBrandColors } from "../../lib/useBrandColors"
 import { Ship, Zap, AlertTriangle, Wrench, TrendingUp } from "lucide-react"
 
 function activeKW(v: import("../../lib/types").VesselData) {
@@ -24,14 +25,13 @@ function cableFaults(v: import("../../lib/types").VesselData) {
   return v.cables.filter(c => c.faultCondition !== "Normal").length
 }
 
-const tooltipStyle = {
-  contentStyle: { background: "#1a2235", border: "1px solid rgba(102,125,182,.3)", borderRadius: 8, fontSize: 12 },
-}
+const tooltipStyle = { contentStyle: { borderRadius: 10, fontSize: 12 } }
 
-const COLORS = ["#667db6","#0082c8","#22c55e","#f59e0b","#ef4444","#a78bfa"]
 
 export default function FleetComparePage() {
   const { vessels, loading } = useFleet()
+  const C = useBrandColors()
+  const COLORS = [C.g2, C.g3, C.g1, C.g4, C.spark, C.ok]
 
   if (loading) return <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "60vh", color: "var(--text-muted)" }}>Loading…</div>
 
@@ -123,8 +123,8 @@ export default function FleetComparePage() {
               <YAxis tick={{ fontSize: 10 }} />
               <Tooltip {...tooltipStyle} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="Load kW" fill="#667db6" radius={[3,3,0,0]} />
-              <Bar dataKey="Gen kVA" fill="rgba(0,130,200,.4)" radius={[3,3,0,0]} />
+              <Bar dataKey="Load kW" fill={C.g2} radius={[3,3,0,0]} />
+              <Bar dataKey="Gen kVA" fill={C.g3} fillOpacity={0.45} radius={[3,3,0,0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -138,7 +138,7 @@ export default function FleetComparePage() {
               <YAxis tick={{ fontSize: 10 }} domain={[0, 100]} unit="%" />
               <Tooltip {...tooltipStyle} formatter={(v: number) => [`${v}%`, "Load %"]} />
               {vessels.map((v, i) => <Bar key={i} dataKey="Load %" fill={COLORS[i % COLORS.length]} radius={[3,3,0,0]} />)}
-              <Bar dataKey="Load %" fill="#0082c8" radius={[3,3,0,0]} />
+              <Bar dataKey="Load %" fill={C.g3} radius={[3,3,0,0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -152,9 +152,9 @@ export default function FleetComparePage() {
               <YAxis tick={{ fontSize: 10 }} allowDecimals={false} />
               <Tooltip {...tooltipStyle} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="Open Faults" fill="#ef4444" radius={[3,3,0,0]} />
-              <Bar dataKey="Overdue" fill="#f59e0b" radius={[3,3,0,0]} />
-              <Bar dataKey="Cable Issues" fill="#a78bfa" radius={[3,3,0,0]} />
+              <Bar dataKey="Open Faults" fill={C["t-danger"]} radius={[3,3,0,0]} />
+              <Bar dataKey="Overdue" fill={C["t-warn"]} radius={[3,3,0,0]} />
+              <Bar dataKey="Cable Issues" fill={C.g3} radius={[3,3,0,0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -163,7 +163,7 @@ export default function FleetComparePage() {
           <div style={{ fontWeight: 600, marginBottom: 14 }}>Fleet Health Radar (lower = better)</div>
           <ResponsiveContainer width="100%" height={220}>
             <RadarChart data={radarData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
-              <PolarGrid stroke="rgba(102,125,182,.2)" />
+              <PolarGrid stroke={C.line} />
               <PolarAngleAxis dataKey="subject" tick={{ fontSize: 10, fill: "var(--text-muted)" }} />
               <PolarRadiusAxis domain={[0, 100]} tick={false} />
               {vessels.map((v, i) => (

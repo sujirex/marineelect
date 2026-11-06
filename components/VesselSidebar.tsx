@@ -20,7 +20,8 @@ export function VesselSidebar({ imo, vesselName }: Props) {
     { href: `/vessel/${imo}/trends`,       label: "90-Day Trends",  icon: TrendingUp },
   ]
 
-  const active = (href: string) => pathname === href
+  const norm = (p: string) => (p.length > 1 ? p.replace(/\/$/, "") : p)
+  const active = (href: string) => norm(pathname) === href
 
   const sidebarContent = (
     <>
@@ -36,17 +37,8 @@ export function VesselSidebar({ imo, vesselName }: Props) {
       {/* Nav links */}
       <nav style={{ padding: "10px 10px", flex: 1 }}>
         {sections.map(({ href, label, icon: Icon }) => (
-          <Link key={href} href={href} onClick={() => setOpen(false)} style={{
-            display: "flex", alignItems: "center", gap: 9,
-            padding: "9px 10px", borderRadius: "var(--radius-sm)",
-            textDecoration: "none", fontSize: 13, fontWeight: 500,
-            marginBottom: 2,
-            color: active(href) ? "var(--text-primary)" : "var(--text-secondary)",
-            background: active(href) ? "rgba(0,130,200,0.12)" : "transparent",
-            borderLeft: active(href) ? "2px solid var(--accent)" : "2px solid transparent",
-            transition: "all .12s",
-          }}>
-            <Icon size={15} style={{ color: active(href) ? "var(--accent)" : "inherit" }} />
+          <Link key={href} href={href} onClick={() => setOpen(false)} className={`side-link${active(href) ? " active" : ""}`}>
+            <Icon size={15} />
             {label}
           </Link>
         ))}
@@ -58,27 +50,11 @@ export function VesselSidebar({ imo, vesselName }: Props) {
     <>
       {/* Mobile backdrop */}
       {open && (
-        <div
-          onClick={() => setOpen(false)}
-          style={{
-            display: "none",
-            position: "fixed", inset: 0,
-            background: "rgba(0,0,0,0.6)",
-            zIndex: 48,
-          }}
-          className="mob-backdrop"
-        />
+        <div onClick={() => setOpen(false)} className="mob-backdrop" />
       )}
 
       {/* Sidebar — sticky on desktop, fixed drawer on mobile */}
-      <aside className={`vessel-aside${open ? " vessel-aside-open" : ""}`} style={{
-        width: "var(--sidebar-w)", flexShrink: 0,
-        background: "linear-gradient(180deg, #0e1629 0%, #0a0f1e 100%)",
-        borderRight: "1px solid var(--border)",
-        display: "flex", flexDirection: "column",
-        position: "sticky", top: "var(--nav-h)", height: "calc(100vh - var(--nav-h))",
-        overflowY: "auto",
-      }}>
+      <aside className={`vessel-aside${open ? " vessel-aside-open" : ""}`}>
         {sidebarContent}
       </aside>
 
@@ -87,42 +63,10 @@ export function VesselSidebar({ imo, vesselName }: Props) {
         onClick={() => setOpen(o => !o)}
         className="vessel-fab"
         aria-label={open ? "Close menu" : "Open menu"}
-        style={{
-          display: "none",
-          position: "fixed", bottom: 24, right: 20,
-          width: 52, height: 52, borderRadius: "50%",
-          background: "var(--brand-grad-135)",
-          border: "none", cursor: "pointer",
-          color: "#fff", alignItems: "center", justifyContent: "center",
-          zIndex: 50,
-          boxShadow: "0 4px 20px rgba(0,0,0,0.45)",
-        }}
+        aria-expanded={open}
       >
         {open ? <X size={20} /> : <Menu size={20} />}
       </button>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .vessel-aside {
-            position: fixed !important;
-            left: 0;
-            top: var(--nav-h);
-            height: calc(100vh - var(--nav-h));
-            transform: translateX(-100%);
-            transition: transform 0.28s ease;
-            z-index: 49;
-          }
-          .vessel-aside.vessel-aside-open {
-            transform: translateX(0);
-          }
-          .mob-backdrop {
-            display: block !important;
-          }
-          .vessel-fab {
-            display: flex !important;
-          }
-        }
-      `}</style>
     </>
   )
 }

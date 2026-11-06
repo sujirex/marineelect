@@ -93,9 +93,9 @@ export default function FleetDashboard() {
 
       {/* Alert banner */}
       {criticalVessels.length > 0 && (
-        <div style={{ background: "rgba(239,68,68,.08)", border: "1px solid rgba(239,68,68,.3)", borderRadius: "var(--radius)", padding: "12px 16px", marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
+        <div className="alert alert-danger" style={{ marginBottom: 24 }}>
           <AlertTriangle size={16} color="var(--danger)" />
-          <span style={{ color: "#fca5a5", fontSize: 13 }}>
+          <span>
             {criticalVessels.length} vessel{criticalVessels.length > 1 ? "s" : ""} require attention — open faults or overdue maintenance
           </span>
         </div>
@@ -176,7 +176,7 @@ export default function FleetDashboard() {
 
       {/* Add vessel modal */}
       {showAdd && (
-        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,.7)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
+        <div style={{ position: "fixed", inset: 0, background: "rgba(7,8,13,.55)", backdropFilter: "blur(4px)", zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
           <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: "var(--radius)", padding: 24, width: "100%", maxWidth: 480 }}>
             <h2 style={{ fontWeight: 700, fontSize: 16, marginBottom: 20 }}>Add New Vessel</h2>
             <div style={{ display: "grid", gap: 12 }}>

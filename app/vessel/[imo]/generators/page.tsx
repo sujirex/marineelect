@@ -25,7 +25,7 @@ function GenCard({ gen, onToggle, onUpdate, onDelete }: {
     : "Not recorded"
 
   return (
-    <div className="card" style={{ border: `1px solid ${gen.running ? "rgba(0,130,200,.4)" : "var(--border)"}`, background: gen.running ? "rgba(0,130,200,.04)" : "var(--bg-card)" }}>
+    <div className="card" style={{ border: `1px solid ${gen.running ? "color-mix(in srgb, var(--g3) 40%, var(--line))" : "var(--border)"}`, background: gen.running ? "color-mix(in srgb, var(--g3) 4%, var(--surface))" : "var(--bg-card)" }}>
       {/* Header */}
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
         <div style={{ width: 36, height: 36, borderRadius: 8, background: gen.running ? "var(--brand-grad-135)" : "var(--bg-elevated)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
